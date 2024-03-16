@@ -43,19 +43,19 @@ Local repo: The local repository is everything in your .gitr directory. Mainly w
 
 Remote repo: The remote repository is a git repository that is stored on some remote computer.
 
-central repo: This will be present in our github.
+Central repo: This will be present in our github.
 
-command to install tree
+Command to install tree
 yum install tree -y(yellowdog updater modifier)
 
-command to install git
+Command to install git
 yum install git
 
 sudo: superuser do
 
-to check version: git --version
+To check version: git --version
 
-create an empty repository: git init . (here dot represents current directory)
+Create an empty repository: git init . (here dot represents current directory)
 
 git add filename
 git add * - It will track all files excluding hidden files
