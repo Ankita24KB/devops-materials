@@ -1,0 +1,27 @@
+=================Branches=================
+Default branch in git is master
+
+To checkout and go into that new branch
+git checkout -b dev
+
+Merge: Getting the commits from one branch to another branch.
+To merge changes you need to checkout branch where you need to merge.
+eg: You have 2 branchs master and dev. If you want to merge the commits in dev branch to master branch then you need to checkout the master branch.
+Command: git merge dev
+
+Cherry-pick: Getting only selected commits from one branch to another branch.
+Command:git cherry-pick commitID
+
+To create only single commit use below command
+eg: you have 5 files which are in staging and committed only 4 files. Now if we commit fifth file it will create another commit to avoid that use below command.
+Command: git commit --amend --no-edit
+
+To delete a branch forcefully use below command:
+
+Command: git branch -D branchname
+
+To cancel merge use abort command.
+Command: git merge --abort
+
+Stashing: To save changes temporarily
+git stash

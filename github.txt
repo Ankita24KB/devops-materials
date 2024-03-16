@@ -1,0 +1,53 @@
+===================Git hub====================
+1. It is a centralized web based platform used for version control.
+2. It simplifies the proces of working with other people and makes it easy to collaborate on projects.
+3. Team members can work on files and easily merge their changes with the master branch of the project.
+==============================================
+
+1. Default branch in git is master and in github it is main branch.
+
+2. To link git to github use below command
+Command: git remote add origin url
+
+3. To unlink the repository use below command
+Command: git remote rm origin
+
+4. To push the code from git to github use below command
+Command: git push -u origin branchname(where the code is present in git)
+
+5. Once you run the above command you need to enter your github user and password(token which you need to generate in settings-->developer settings-->PAT(classic token)
+
+Token: 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
+
+6. Only committed files pushed into the github.
+
+7. At a time only we can connect to one repository.
+
+8. We can push multiple branches into the repository as well.
+
+9. To rename the branch use below command
+Command: git branch -m oldname newname
+
+10. To delete branch locally use below command:
+Command: git branch -d branchname
+
+To delete branch in github from local system use below command:
+Command: git push -u origin --delete branchname
+
+11. To check current repository which is linked use below command
+Command: git remote -v
+
+12. To get code changes from central repository(github) to local repository(git) use below command
+Command: git pull origin dev
+
+git pull = git fetch + git merge
+
+What is gitpull?
+A) It is the combination of git fetch and git merge.
+
+To fetch the changes use below command
+Command: git fetch origin branchname
+
+To merge the changes from central to local use below command
+Command: git merge origin/branchname
+
