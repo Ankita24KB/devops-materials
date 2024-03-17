@@ -1,0 +1,154 @@
+===========Maven===========
+1. It is an automation project management tool developed by Apache software foundation.
+2. It is based on POM(project object model).
+POM.xml(xml:extensible markup language) 
+
+-->POM.xml files consists METADATA, DEPENDENCIES, KIND OF OUTPUT, KIND OF PROJECT, DESCRIPTION.
+
+Note: One project contains only one workspace, each workspace consists of one POM.xml files. 
+
+Maven is a build tool and manage dependencies.
+==================================================================================
+What is build tool:
+
+1. It is used to set up everything which is required to run your java code. This cna applied to your entire java project.
+2. It generates source code, compiling code, packing code to a jar etc.
+3. POM refers the XML file that have all information regarding project and configuration details.
+4. Mainly configuration file is on pom.xml.
+5. It has description of the project details regarding version and configuration management.
+6. The XML file is in the project home directory.
+7. Maven can build any number of projects into desired output such as .jar, .war and .ear
+	.jar= java archive file
+	.war= web archive file
+	.ear= enterprise archive
+8. It is mostly used for java based projects.
+9. Maven is written in java.
+
+Java --> WAR files
+Java with spring boot --> JAR files
+python-->PIP
+javascript-->npm
+==================================================================================
+a. Maven helps in getting the right jar file for each project as there may be different versions of separate packages.
+b. For downlaoding dependencies visit mvnrepository.com
+c. Dependencies : Refers to the java libraries that are needed for the project.
+d. Repositories: Refers to the directories of packaged jar files.
+
+Problems without maven:
+1. Adding set of jars in each project
+2. Creating the right project structure.
+3. Building and deploying the project.
+
+Goal is a command that we are performing to build the code.
+
+Local Repo: Refers to the machine of the developer where all the project materials are saved.
+
+Remote Repo: Refers to the repository present on a web server which is used when maven needs to downlaod dependencies.
+
+Central Repo: Refers to the maven community that comes into the action when there is a need of dependencies and those dependencies and those dependencies cannot be found in the local repository.
+
+Goals: It is nothing but a task.
+
+How Maven works:
+
+There are various components of maven architecture - a local repository or the local machine that you work on. There is a central repository and then there is a remote repository or the remote web server.
+
+Whenever you specify any dependency in the pom.xml file, maven will look for it in the central repository first. If the dependency is present in the central repository it will copy the same onto your local machine.
+
+However, if that dependency is not present there, Maven will fetch it from the remote repository or remote web server using the internet. So, the internet is very much mandatory for using maven.
+==================================================================================
+There are seven phases in maven build life cycle:
+1. Generating resources
+Command: mvn archetype:generate
+
+2. Compile the code
+Command: mvn compile
+
+3. Test the code
+Command: mvn test
+
+4. Build
+Command: mvn package
+
+5. Install(into local repo or Artifactory)
+Command: mvn install
+
+6. Deploy(without jenkins cannot perform)
+
+7. Clean(delete all the runtime files)
+Command: mvn clean
+
+Java standard version for Maven: java-1.8.0
+==================================================================================
+Maven installation in ec2 server:
+
+Step 1: 
+a. First install maven dependency java
+yum install java-1.8.0-openjdk -y
+
+b. Get the maven repsoitory
+Go to dlcdn.apache.org ---> maven ---> bin ---> latest version ---> copy bin.tar.gz file
+
+c. Download the repo using below command(wget)
+wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+
+d. Unzip the tar files
+Command: tar -zxvf apache-maven-3.9.6-bin.tar.gz
+
+e. Next install maven
+Command: yum install maven -y
+
+f. Check maven version
+Command: mvn -version or mvn -v
+
+** If you install maven without java installation, then it will automatically install java latest version. So first we should java-1.8.0 and then install maven.
+
+g.Next to generate sample code use below command. Run this command in maven folder cd apache-maven-3.9.6
+Command: mvn archetype:generate
+
+** In Project home directory only we need to perform commands because pom.xml and src files are present in it.
+
+Step 2: Compile the code
+Command: mvn compile
+
+** It will generate a target folder after compiling the code.
+
+** Output files will store in groupID folder. (here it is devops)
+
+Step 3: Test the code
+Command: mvn test
+
+Step 4: Package (It will generate a jar file)
+Command: mvn package
+
+Step 5: mvn install
+
+Step 7: mvn clean (It will delete target folder)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
