@@ -1,0 +1,23 @@
+1. To view the build history go to jobs in the jekins folder
+cd /var/lib/jenkins/
+
+2. Discard old builds feature is used to delete old builds. Below are 2 options provided to customize the build history.
+i.  Days to keep build
+ii. Max # of builds keep
+
+3. Parameters
+a. Boolean- true or false
+b. Choice- multiple options
+c. File- build local build
+d. String- input(single line)
+e. Multistring- Input (multi lines)
+
+If you lost jenkins credentials use the below commands
+cd /var/lib/jenkins
+vim config.xml
+
+Modify "useSecurity" to false from true and save the file
+
+Restart the jenkins. (if you are making any updates to config file of any service, need to restart the service)
+
+systemctl restart jenkins

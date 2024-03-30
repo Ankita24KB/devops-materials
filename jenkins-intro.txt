@@ -1,0 +1,72 @@
+----------------------------CI/CD----------------------------
+CI: Continuous Integration
+It is combination of build and continuous test
+
+CI Server: Here build, test and deploy all these activities are performed in a single CI server.
+
+1. Whenever a developer commits the code using source code management tool like GIT, then the CI pipeline gets the changes of the code and runs automatically build and unit test.
+2. Due to integrating the new code with old code, we can easily get to know the code is a success or failure.
+3. It finds the errors more quickly.
+4. Deliver the products to client more frequently.
+5. Developers don't need to manual tasks.
+6. Reduces the developers time 20% to 30%
+
+
+
+CD: Continuous Deployment/Delivery
+Continuous Delivery is making it available for deployment. Anytime a new build artifact is available, the artifact is automatically placed in the desired environment and deployed.
+Build--->Test--->Deploy to staging--->Acceptance tests--->Deploy to production(manual)--->Smoke tests
+
+Continuous Deployment is when you commit your code then it gets automatically tested, build and deploy on the production server.
+Build--->Test--->Deploy to staging--->Acceptance tests--->Deploy to production(automatic)--->Smoke tests
+
+CI/CD Pipeline:
+vesion control(GIT)--->Build(Maven)--->Unit test(Sonar)--->Deploy(pre-prod)--->Auto test--->Deploy to prod--->measure+validate
+
+vesion control: Here developers need to write code for web apps. So it needs to be committed using version control system like GT or SVN.
+
+Build: Let us consider your code is written in java, it needs to be compiled before execution. In this build step code gets compiled.
+
+Unit test: If the build step is completed, then move to testing phase in this step unit test will be done.
+
+Deploy: If the step is completed, then move to deploy phase in this step you can deploy your code in dev, testing environment. Here you can see your application output.
+
+Auto test: Once your code is working fine in testing servers, then we need to do automation testing using selenium or Junit.
+
+Deploy to Production: If eveything is fine then you can directly deploy your code in production server.
+
+Jenkins Setup:
+Step-1: Install java(amazon-linux-extras install java-openjdk11 -y)
+Step-2: Getting Jenkins Repo(jenkins.io)
+Commands:
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+Step-3: Install Jenkins (yum install jenkins -y)
+Step-4: Start jenkins(systemctl start jenkins)
+
+To get jenkins admin password go to below path
+var/lib/jenkins/secrets/initialAdminPassword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

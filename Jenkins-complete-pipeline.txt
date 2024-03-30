@@ -1,0 +1,88 @@
+----------------Jenkins complete pipeline----------------
+Deploy an application in tomcat web server using CI/CD pipeline
+1. Git - To maintain the source code
+2. Maven - To build the source code
+3. Jenkins - To integrate all the tools
+4. Sonar - For code quality test
+5. Nexus - To store the artifact
+6. Tomcat - Webserver to deploy an application
+
+Deployment: The term deployments refers the installation of a webapp on webapp server
+
+Reasons of the deployment:
+1. Adding/enhancing new features to the application.
+2. Removing the bugs.
+3. Improving the performance.
+4. Breaking large applications to microservices.
+
+Needs for deployment:
+1. We need to have infra setup.
+2. New release of code.
+3. Involvement of dev, QA and devops team
+4. Creating new Dbs if needed.
+5. Approval from Release manager(in case of new release).
+
+Precautions:
+1. Need to take backups of the current builds and databases.
+2. Need to provide isolated environments for dev, test and prod.
+3. Can be able to do rollback if the deployment fails in some cases.
+4. Make sure we are deploying the correct environment and client application.
+----------------------------------------------
+Step-1:
+Launch 4 instances with same pem file
+1. Jenkins: T2 micro
+2. Tomcat: T2.micro
+3. Sonat: T2.medium(20 GB of EBS volume)
+4. Nexus: T2.medium(20 GB of EBS volume)
+
+--------------Interview question--------------
+Difference between wget and curl
+wget: It is used to download only files from the internet.
+curl: It is use to check for network connection also
+----------------------------------------------
+
+Step-2:
+Login into jenkins dashboard and install these following plugins
+1. Sonarqube scanner: To scan the code
+2. Nexus artifactory uploader: To store the files in nexus
+3. SSH Agent: To send the files from one server to another server.
+
+Step-3:
+Create a jenkins piepline job and write a jenkins file to deploy a webapp. Usually we have 2 types of pipelines:
+1.scripted
+2.declarative
+
+Scripted pipeline:
+Stage1: Get the code from the github to CI server
+node{
+stage("code"){
+git "github-url"
+}
+}
+-------------------------------------------
+node{
+    stage("Code")
+    {
+        git "https://github.com/Charan-19/WebApp.git"
+    }
+    stage("Build"){
+        def mavenHome = tool name: "maven", type: "maven"
+        def mavenCMD= "${mavenHome}/bin/mvn"
+        sh "${mavenCMD} clean package"
+    }
+    stage("Test"){
+        withSonarQubeEnv("mysonar"){
+            def mavenHome = tool name: "maven", type: "maven"
+            def mavenCMD= "${mavenHome}/bin/mvn"
+            sh "${mavenCMD} sonar:sonar"
+        }
+    }
+    stage("Artifactory-uploader"){// this you can generate using pipeline script
+        nexusArtifactUploader artifacts: [[artifactId: 'myweb', classifier: '', file: 'target/myweb-8.2.8.war', type: '.war']], credentialsId: '74034e16-317f-4ed4-971e-7f7e31b89e14', groupId: 'in.javahome', nexusUrl: '54.175.246.136:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'charan-releases', version: '8.2.8'
+    }
+    stage("Deploy"){// this you can generate using pipeline script
+        sshagent(['9fd41c22-cfdf-4a50-9b91-e4e5c77325a3']) {
+            sh "scp -o StrictHostKeyChecking=no target/myweb-8.2.8.war ec2-user@52.90.92.0:/opt/apache-tomcat-9.0.86/webapps"
+        }
+    }
+}

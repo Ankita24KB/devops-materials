@@ -1,0 +1,84 @@
+------------------------------Deployment using jenkins------------------------------
+Deployment: Installing web applications on web servers.
+
+Different type of web servers:
+1. Apache TOMCAT
+2. HTTPD
+3. NGINX
+4. IBM
+5. Web sphere
+
+Steps to do deployment
+
+1. Create an ec2 instance for jenkins
+2. Install jenkins in it.
+3. Create a job using freestyle deployment.
+4. Get the code from github in to the job.
+5. To build the code we need maven.
+6. Install maven dependency java 1.8.0
+To check no of java versions present in the sever, use below command:
+update-alternatives --config java
+7. Install maven and make sure java version is 1.8.0
+8. Go to job and configure build steps by selecting invoke maven top level goals
+9. Type clean package to get the code and build the code.
+10. Next step is deployment. For that we need apache tomcat server.
+11. Launch an instance to setup tomcat.
+12. Go to dlcdn.org--->tomcat--->bin--->select latest version--->copy tar.gz file
+13. Download the above file using below command
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87.tar.gz
+14. Un tar the file by using below commaand
+tar -zxvf filename
+15. To start/stop any service go to bin folder.
+16. To start tomcat server execute startup.sh
+17. Tomcat dependency is also java. There is no specific version needed to run tomcat.
+amazon-linux-extras install java-openjdk11 -y
+18. Next start tomcat using below command in bin folder
+./startup.sh
+19. Open tomcat uing public ip:8080
+20. All app deployments details are present in manager folder.
+21. To get access into that made below changes in below files
+---> go to webapps folder
+cd webapps
+
+---> go to manager folder
+cd manager
+
+---> go to META-INF folder
+cd META-INF
+
+---> Openm context.xml file
+vim context.xml
+
+go to 21st line and delete 2 lines using 2dd
+
+22. Now we got access to manager apps. 
+23. Now we need to set credentials to log in.
+24. Go back to tomcat main folder and go to conf folder
+cd ../../..
+cd conf
+25. open tomcat-users.xml file
+26. Go to last line of the file
+we use manager-gui(allows access to the HTML GUI and status pages) and manager-script roles(allows access to the text interfaces and the status pages)
+27. Go to the tomcat-users.xml file and add above 2 roles.
+28. Copy 3 lines(role) at the end of the file and paste at the end of the file.
+use 3yy to copy 3 lines and use p command to paste.
+29. Provide 2 roles and set credentials for the same.
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<user username="tomcat" password="charan123" roles="manager-gui, manager-script"/>
+30. Restart tomcat service as we made changes to configuration files.
+./shutdown.sh
+./startup.sh
+31. Go to the task in jenkins and configure post-bulid actions
+32. To deploy an application we need deploy to container option in post-bulid actions. To get that go to manage jenkins--->available plugins--->search for "deploy to container"--->click on install
+33. Give target folder path in WAR/EAR files option
+target/*.war
+34. Give app name in Context path
+35. Add tomcat in containers option
+36. Add webhooks in repository settings and select github webhook trigger in job
+
+
+
+
+
+

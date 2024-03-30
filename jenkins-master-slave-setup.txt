@@ -1,0 +1,47 @@
+------------Master and slave jenkins setup using ssh------------
+In master server:
+
+1. Setup jenkins
+2. Remove false and add bash to jenkins user
+Command: vim /etc/passwd
+3. Set password for jenkins user.
+Command: passwd jekins
+4. Provide root user permissions to jenkins(add jenkins and before all add NOPASSWD)
+Command: visudo --> 100th line
+jenkins ALL=(ALL)       NOPASSWD: ALL
+5. Change password authentication to yes(vi /etc/ssh/sshd_config)
+6. Restart sshd as we made changes to this service(systemctl restart sshd)
+
+Second step in Master:
+1. Login into the jenkins user
+command: su - jenkins
+2. Generate key if we didn't create at the time of launching an isntance.
+Command: ssh-keygen
+3. Copy the public key to slaves.
+Command: ssh-copy-id jenkins@slave-public-ip
+4. Login into the slave from the master server.
+command: ssh jenkins@slave-public-address
+5. To confirm login to slave server from master, create some files in master and cross verify the files are presented in slave server or not.
+6. To come out of slave server run exit command.
+----------------------------------------------
+
+In slave servers:
+1. Add user jenkins
+2. No need to add bash for jenkins in /etc/passwd
+3. Set password for jenkins user.
+Command: passwd jekins
+4. Provide root user permissions to jenkins(add jenkins and before all add NOPASSWD- This is used not to ask password when we move from one user to another user in other server)
+Command: visudo --> 100th line
+jenkins ALL=(ALL)       NOPASSWD: ALL
+5. Change password authentication to yes(vi /etc/ssh/sshd_config)
+6. Restart sshd as we made changes to this service(systemctl restart sshd)
+
+----------------------------------------------
+Interview question:
+If you lost your pem file how can you login into the server?
+A)
+1.Create a key in jenkins server. you will get public and private key. Copy the public key from master(jenkins) to slave(label) server.
+
+
+ 
+

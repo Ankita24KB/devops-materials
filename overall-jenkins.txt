@@ -1,0 +1,111 @@
+---------------------Jenkins----------------------------
+
+ContinuousIntegration: It is the combination of build and test.
+
+ContinuousIntegration= ContinuousBuild + ContinuousTest
+
+CI server:
+
+Here build and test are performed in a single CI server.
+
+Continuous delivery/deployment:
+
+Continuous delivery is making it available for deployment. Anytime a new build artifact is available, the artifact is automatically placed in the desired environment and deployed.
+
+Continuous deployment is when you commit your code then it gets automatically tested, build and deploy on the prod servver.
+
+Diff between Continuous delivery and continuous deployment:
+In Continuous delivery, the code deployment to prod server is done manually where as in continuous deployment it is done automatically.
+
+Types of pipelines in jenkins:
+There are 3 types of pipelines:
+1. Freestyle
+2. Declarative
+3. Scripted
+
+Stages invoved in pipeline:
+1. Code
+2. Build
+3. Test
+4. Deploy
+
+Alternatives to nexus are s3, jfrog.
+
+Snapshots: It will store commits 
+Releases: Code that we are going to put in production server.
+
+Jenkins:
+It is an open source free automation tool that is used to build, test and deploy the code. It is written in java by kohsuke kawaguchi runs on windows, linux and mac os.
+1. It is platform independent tool.
+2. Can be integrated with third party tools.
+3. It consists of multiple plugins. we can write our own plugins.
+4. Used to detect faults in the development.
+5. It will monitor the code.
+6. Supports master and slave concept.(To test application on mutliple environments[dev, test, prod]).
+7. Speed release cycle.
+8. Configuration and setup is easy.
+
+Whenever developers write the code, we integrate all the code of all developers at any point of time and build, test, and deliver/deploy it to the client. This is called CI/CD.
+
+Alternatives for jenkins:
+1. Bamboo
+2. circle CI
+3. Team city
+4. Git lab
+5. Buddy
+6. AWS codepipeline
+7. Azure pipeline
+
+Jenkins setup:
+
+Step 1: Getting jenkins repo(jenkins.io)
+a) sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+b) sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+Step 2: Install java
+amazon-linux-extras install java-openjdk11 -y
+
+Step 3: Install jenkins
+yum install jenkins -y
+
+Step 4: Starting jenkins service
+systemctl start jenkins.service
+systemctl status jenkins.service
+
+Linked Jobs: one job is linked with another job
+Upstream and downstream jobs:
+For job1, job2 and job3 are downstream jobs
+For job2, job1 is upstream and job3 is downstream
+For job3, job1,job2 are up stream jobs
+
+Different types to implement slave and server in jenkins:
+1. Label
+2. SSH
+
+How to connect to server directly if we lost pem file?
+A) 1. Can generate a key inside a server
+      Command: ssh-keygen - It will generate 2 keys
+	i)private key - used to connect with the server
+	ii)public key - used to communicate with other servers
+How to connect to server directly if we lost pem file and unable to login into the server?
+A) We can using existing pem file or can generate new pem file.
+
+CRON Job: schedule the jobs that need to be run at a particular intervals.
+* - minutes (0-59)
+* - hour(0-23)
+* - day of month(1-31)
+* - month(1-12)
+* - day of week(0-6)(sunday=0)
+
+POLL SCM: Used to schedule the jobs in jenkins (custom time)- whenever new commit is made then it will build the code
+
+Build periodically: It will build the code automatically on scheduled time even if there are changes or not in the code.
+
+Webhooks: Developer commits the code in git then jenkins triggers the build automatically.
+
+
+
+
+
+
+
